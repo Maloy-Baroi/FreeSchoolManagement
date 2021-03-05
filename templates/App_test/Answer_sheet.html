@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load crispy_forms_filters %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{% static 'images/logo/free schooling logo.png' %}" sizes="24x24">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/navbar_css/style.css' %}">
+    <title>Exam Starts</title>
+</head>
+<body>
+<div class="mt-5" style="text-align: center">
+    <button onclick="startExam()" class="btn btn-outline-primary" id="startExamBtn">Start Exam</button>
+</div>
+<p id="duration" style="display: none;">{{ Duration }}</p>
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h1 id="exam_time" style="display: none;"></h1>
+            <form method="post" enctype="multipart/form-data" class="form-group">
+                <div style="display: none;" id="formDIV">
+                    <a href="{{ QuestionPaper.url }}" download class="text-danger">CLICK TO GET THE QUESTION</a>
+                    <legend class="form-group">{{ subject }} <br> {{ exam_type }}</legend>
+                    <fieldset class="form-group">
+                        {{ answerform|crispy }}
+                    </fieldset>
+                </div>
+                <div style="display: none;" id="submitBTN">
+                    <button type="submit" class="btn btn-outline-primary">Submit Paper</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<script>
+    let submit_time = document.getElementById('duration');
+    let exam_timeShow = document.getElementById('exam_time');
+    let submitBTN = document.getElementById('submitBTN');
+    let startExamBtn = document.getElementById('startExam');
+    let formDIV = document.getElementById('formDIV');
+    total_time = parseInt(submit_time.innerText);
+    first_submit_hour = (total_time - 10790);
+    Due_time = total_time - first_submit_hour;
+    exam_time = parseInt(submit_time.innerText) / 3600;
+    exam_timeShow.innerText = exam_time;
+
+    openBTNTime = first_submit_hour * 1000;
+    closeBTNtime = first_submit_hour * 2000;
+    function startExam() {
+        formDIV.style.display = 'block';
+        exam_timeShow.style.display = 'block';
+        setTimeout(submitOpen, openBTNTime);
+        setTimeout(submitClose, closeBTNtime);
+    }
+
+    function submitOpen() {
+        submitBTN.style.display = 'block';
+    }
+
+    function submitClose() {
+        submitBTN.style.display = 'none';
+    }
+</script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
+        integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"
+        integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG"
+        crossorigin="anonymous"></script>
+</body>
+</html>

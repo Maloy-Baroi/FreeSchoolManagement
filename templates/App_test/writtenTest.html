@@ -1,0 +1,28 @@
+{% extends 'navbar.html' %}
+{% load crispy_forms_filters %}
+{% block body %}
+    {% if user.is_teacher %}
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form class="form-group" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <legend class="form-group">Upload Written Question</legend>
+                    <fieldset class="form-group">
+                        {{ QuestionForm|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    {% else %}
+        {% for Q in Question %}
+            <a href="{% url 'App_test:answer_paper' sub=Q.Subject exam_type=Q.Exam_title %}">
+                {{ Q.Subject }} {{ Q.Exam_title }}
+            </a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+    <style type="text/css">
+        .marquee {
+            white-space: nowrap;
+            animation: scroll-right-left 5s linear infinite;
+        }
+
+        @keyframes scroll-right-left {
+            from {
+                transform: translateX(400px);
+            }
+            to {
+                transform: translateX(-10px);
+            }
+        }
+    </style>
+    <div class="marquee">
+        <p><b>I am the king of my own kingdom. But I have no kingdom.</b></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="cse">
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bba">
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="bthm">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
