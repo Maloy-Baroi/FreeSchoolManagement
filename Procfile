@@ -1,0 +1,1 @@
+web: gunicorn Free_SchoolManagement.wsgi
